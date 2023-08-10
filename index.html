@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Conexão com BD Sakila</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <h2>Clientes - Sakila</h2>
+
+    <form action="">        
+      <select name="customers" onchange="showCustomer(this.value)">
+        <option value="">Select a customer:</option>
+        <option value="583">Marshall Thorn</option>
+        <option value="250">Jo Fowler</option>
+        <option value="78">Lori Wood</option>
+      </select>
+    </form>
+    <br>
+    <div id="txtHint">Customer info will be listed here...</div>
+    
+    <script>
+    function showCustomer(str) {
+      if (str == "") {
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+      }
+
+      const xhttp = new XMLHttpRequest();
+
+      xhttp.onload = function() {
+        document.getElementById("txtHint").innerHTML = this.responseText;
+      }
+
+      xhttp.open("GET", "getcustomer.php?q="+str);
+      xhttp.send();
+
+    }
+
+    </script>
+
+    </body>
+</html>
